@@ -1,0 +1,2 @@
+#add-booking { background: #FFF; padding: 10px; }
+#add-booking p-calendar .form-control:disabled,#add-booking p-calendar .form-control[readonly] { background: #FFF; }

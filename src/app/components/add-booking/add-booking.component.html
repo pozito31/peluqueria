@@ -1,0 +1,119 @@
+<div class="row" id="add-booking">
+  <div class="col-12">
+    <!-- Formulario reactivo -->
+    <form [formGroup]="formBooking" (ngSubmit)="addBooking()">
+      <!-- Nombre del usuario que hace la reserva -->
+      <div class="row form-group">
+        <div class="col-12 mt-2">
+          <label for="name">{{ "label.name" | translate }}</label>
+          <input
+            type="text"
+            formControlName="name"
+            id="name"
+            class="form-control"
+            [ngClass]="{
+              'is-valid': name.dirty && !name.invalid,
+              'is-invalid': name.dirty && name.invalid
+            }"
+          />
+
+          <div class="valid-feedback">
+            <span>{{ "label.success" | translate }}</span>
+          </div>
+          <div class="invalid-feedback"></div>
+        </div>
+      </div>
+
+      <!-- Fecha de la reserva (p-calendar de primeng) -->
+      <div class="row form-group">
+        <div class="col-12 mt-2">
+          <label for="date">{{ "label.date" | translate }}</label>
+          <p-calendar
+            [locale]="locale"
+            dateFormat="dd/mm/yy"
+            [stepMinute]="30"
+            id="date"
+            formControlName="date"
+            [readonlyInput]="true"
+            inputStyleClass="form-control is-valid"
+            [minDate]="today"
+          ></p-calendar>
+        </div>
+      </div>
+
+      <!-- Servicio de la reserva -->
+      <div class="row form-group">
+        <div class="col-12 mt-2">
+          <label for="services"> {{ "label.services" | translate }}</label>
+          <select
+            class="form-control is-valid"
+            formControlName="service"
+            id="services"
+          >
+            <option
+              [selected]="first"
+              [value]="option"
+              *ngFor="let option of options; let first = first"
+            >
+              {{ option | translate }}
+            </option>
+          </select>
+
+          <div class="valid-feedback">
+            <span>{{ "label.success" | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="row form-group">
+        <div class="d-grid gap-2 col-12">
+          <button
+            [disabled]="formBooking.invalid"
+            type="submit"
+            class="btn btn-block btn-primary"
+          >
+            {{ "label.add.booking" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Templates para los modales -->
+
+<ng-template #modal_success let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "label.success" | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ "label.add.success" | translate }}
+  </div>
+</ng-template>
+
+<ng-template #modal_exists let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "label.error" | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ "label.exists" | translate }}
+  </div>
+</ng-template>

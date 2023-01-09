@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ "label.login" | translate }}</h5>
+  <button
+    type="button"
+    class="close"
+    data-dismiss="modal"
+    aria-label="Close"
+    (click)="activeModal.close()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-12">
+      <!-- Mensaje de exito -->
+      <div class="alert alert-primary" role="alert" *ngIf="showLoginSuccess">
+        <strong>{{ "label.login.success" | translate }}</strong>
+      </div>
+
+      <!-- Mensaje de error -->
+      <div class="alert alert-danger" role="alert" *ngIf="showLoginError">
+        <strong>{{ "label.login.error" | translate }}</strong>
+      </div>
+
+      <!-- Usamos formulario reactivo -->
+      <form [formGroup]="formLogin" (ngSubmit)="checkLogin()">
+        <!-- Usuario -->
+        <div class="row form-group">
+          <div class="col-12">
+            <label for="user">{{ "label.user" | translate }}</label>
+            <input
+              type="text"
+              formControlName="user"
+              class="form-control"
+              id="user"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="row form-group">
+          <div class="col-12">
+            <label for="pass">{{ "label.pass" | translate }}</label>
+            <input
+              type="password"
+              formControlName="pass"
+              class="form-control"
+              id="pass"
+            />
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="row form-group">
+          <div class="col-12">
+            <button
+              [disabled]="formLogin.invalid"
+              type="submit"
+              class="btn btn-block btn-primary"
+            >
+              {{ "label.login" | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="row" id="header">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-md-10 col-12 text-light">
+        <h1>{{ "label.app" | translate }}</h1>
+      </div>
+      <div class="col-md-2 col-12 login-button">
+        <!-- Boton login -->
+        <button
+          type="button"
+          class="btn btn-block btn-primary"
+          *ngIf="!authService.isAuthenticated()"
+          (click)="openLogin()"
+        >
+          {{ "label.login" | translate }}
+        </button>
+
+        <!-- Boton logout -->
+        <button
+          type="button"
+          class="btn btn-block btn-primary"
+          *ngIf="authService.isAuthenticated()"
+          (click)="logout()"
+        >
+          {{ "label.logout" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
